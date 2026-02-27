@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منصة صحة | استعلام الإجازات المرضية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-blue: #347ab7;
+            --dark-blue: #2c6eb5;
+            --light-bg: #f8fafd;
+            --border-color: #e6e6e6;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+
+        /* الهيدر العلوي */
+        .top-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 8%;
+            border-bottom: 1px solid var(--border-color);
+            background: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--primary-blue);
+            font-size: 13px;
+            transition: 0.3s;
+        }
+
+        .login-btn {
+            background: var(--primary-blue);
+            color: white !important;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-weight: 600;
+        }
+
+        /* الحاوية الرئيسية */
+        .container {
+            max-width: 650px;
+            margin: 50px auto;
+            padding: 0 20px;
+            text-align: center;
+            min-height: 60vh;
+        }
+
+        .page-title {
+            color: var(--primary-blue);
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .page-desc {
+            color: #888;
+            font-size: 12px;
+            margin-bottom: 35px;
+            line-height: 1.6;
+        }
+
+        /* مدخلات البيانات */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group input {
+            width: 100%;
+            max-width: 450px;
+            padding: 12px;
+            margin-bottom: 12px;
+            border: 1px solid #dcdcdc;
+            border-radius: 6px;
+            text-align: center;
+            font-size: 15px;
+            background: #fafafa;
+            outline: none;
+        }
+
+        .input-group input:focus {
+            border-color: var(--primary-blue);
+            background: #fff;
+        }
+
+        /* بطاقة النتائج المماثلة للصورة */
+        .result-card {
+            background: #f9f9f9;
+            border: 1px solid #efefef;
+            border-radius: 8px;
+            padding: 25px;
+            margin: 30px auto;
+            text-align: right;
+            display: none; /* تظهر عند البحث */
+            box-shadow: 0 2px 10px rgba(0,0,0,0.02);
+        }
+
+        .grid-info {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .item label {
+            display: block;
+            color: #999;
+            font-size: 11px;
+            margin-bottom: 4px;
+        }
+
+        .item span {
+            display: block;
+            font-size: 14px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        /* الأزرار */
+        .btn-action {
+            background: var(--primary-blue);
+            color: white;
+            border: none;
+            padding: 10px 45px;
+            border-radius: 5px;
+            font-size: 15px;
+            cursor: pointer;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+
+        .btn-outline {
+            background: #4a6fa5;
+            color: white;
+            border: none;
+            padding: 8px 30px;
+            border-radius: 5px;
+            font-size: 13px;
+            cursor: pointer;
+        }
+
+        /* الفوتر الأزرق الاحترافي */
+        .main-footer {
+            background: var(--dark-blue);
+            color: white;
+            padding: 50px 8% 30px;
+            margin-top: 80px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 30px;
+        }
+
+        .footer-col {
+            flex: 1;
+            min-width: 200px;
+            text-align: right;
+        }
+
+        .footer-col h4 {
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        .footer-col p {
+            font-size: 13px;
+            margin: 8px 0;
+            opacity: 0.8;
+        }
+
+        .seha-logo-footer {
+            font-size: 24px;
+            font-weight: 800;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+
+<header class="top-header">
+    <div class="nav-menu">
+        <a href="#" class="login-btn">تسجيل الدخول</a>
+        <a href="#">إنشاء حساب</a>
+        <a href="#">تواصل معنا</a>
+        <a href="#">الأسئلة الشائعة</a>
+        <a href="#">الاستعلامات</a>
+        <a href="#">الخدمات</a>
+        <a href="#">الرئيسية</a>
+    </div>
+    <div style="font-size: 22px; font-weight: 800; color: var(--primary-blue);">Seha | صحة</div>
+</header>
+
+<div class="container">
+    <h1 class="page-title">الإجازات المرضية</h1>
+    <p class="page-desc">خدمة الاستعلام عن الإجازات المرضية تتيح لك الاستعلام عن حالة طلبك للإجازة ويمكنك طباعتها عن طريق تطبيق صحتي</p>
+
+    <div class="input-group">
+        <input type="text" id="serviceCode" placeholder="GSL26012602000">
+        <input type="text" id="idNumber" placeholder="1171592387">
+    </div>
+
+    <div class="result-card" id="resultCard">
+        <div class="grid-info">
+            <div class="item">
+                <label>الاسم:</label>
+                <span>سورين هايف غازي الحميد</span>
+            </div>
+            <div class="item">
+                <label>تاريخ إصدار تقرير الإجازة:</label>
+                <span>2026-02-26</span>
+            </div>
+            <div class="item">
+                <label>تبدأ من:</label>
+                <span>2026-02-26</span>
+            </div>
+            <div class="item">
+                <label>وحتى:</label>
+                <span>2026-02-26</span>
+            </div>
+            <div class="item">
+                <label>المدة بالأيام:</label>
+                <span>1</span>
+            </div>
+            <div class="item">
+                <label>اسم الطبيب:</label>
+                <span>مناسك عبد الدين محمد احمد</span>
+            </div>
+            <div class="item">
+                <label>المسمى الوظيفي:</label>
+                <span>طبيب عام</span>
+            </div>
+        </div>
+    </div>
+
+    <button class="btn-action" onclick="showResult()">استعلام جديد</button><br>
+    <button class="btn-outline" onclick="location.reload()">رجوع للاستعلامات</button>
+</div>
+
+<footer class="main-footer">
+    <div class="footer-content">
+        <div class="footer-col">
+            <h4>تواصل معنا</h4>
+            <p>الهاتف: 920546005</p>
+            <p>البريد: support@seha.sa</p>
+            <p>أوقات العمل: 8 ص - 11 م</p>
+        </div>
+        <div class="footer-col">
+            <h4>روابط سريعة</h4>
+            <p>بوابة الخدمات</p>
+            <p>التحقق من التقرير</p>
+            <p>سياسة الخصوصية</p>
+        </div>
+        <div class="footer-col" style="text-align: left;">
+            <div class="seha-logo-footer">Seha | صحة</div>
+            <p>منصة تخدم جميع المنشآت الصحية في المملكة العربية السعودية وتهدف لرفع جودة الخدمات الرقمية الصحية.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    // وظيفة الاستعلام
+    function showResult() {
+        const code = document.getElementById('serviceCode').value.trim();
+        const id = document.getElementById('idNumber').value.trim();
+        const card = document.getElementById('resultCard');
+
+        // الرموز المقبولة بناءً على طلبك
+        if ((code === "GSL26012602000" || code === "GSL26012601000") && id === "1171592387") {
+            card.style.display = 'block';
+            card.scrollIntoView({ behavior: 'smooth' });
+        } else {
+            alert("عذراً، البيانات المدخلة غير صحيحة.");
+        }
+    }
+
+    // لزيادة الاحترافية: اجعل البيانات تظهر بمجرد الضغط على Enter
+    document.addEventListener('keypress', function (e) {
+        if (e.key === 'Enter') {
+            showResult();
+        }
+    });
+</script>
+
+</body>
+</html>
